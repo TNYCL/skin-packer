@@ -20,19 +20,17 @@ def download(extract_to='./settings'):
             zipfile = ZipFile(BytesIO(http_response.read()))
             zipfile.extractall(path=extract_to)
             print('"Settings" folder successfully created.')
-            return True
         except Exception:
             exit('ERROR: in download() function. (Error #2)')
-    elif template_exist == False:
+    if template_exist == False:
         print('Template folder not exists, downloading.')
         try:
             context = ssl._create_unverified_context()
-            http_response = urlopen(settings_url, context=context)
+            http_response = urlopen(template_url, context=context)
             print('ZIP Exctracting...')
             zipfile = ZipFile(BytesIO(http_response.read()))
             zipfile.extractall(path='./template')
             print('Template folder successfully created.')
-            return True
         except Exception:
             exit('ERROR: in download() function. (Error #2)')
     return True

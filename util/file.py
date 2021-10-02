@@ -1,7 +1,10 @@
 import os
+from handler import create
 from pathlib import Path
 from handler import select
 from util import message as msg
+import shutil
+import codecs
 
 def openfolder(path):
     path = os.path.realpath(path)
@@ -33,13 +36,21 @@ def checkall():
     elif Path(directory.format('/Arts/thumbnail.jpg')).is_file() == False:
         msg.error('"Arts/thumbnail.jpg" not found.', 'File')
     else:
-        msg.info('Files are verified, progressing skin files.')
+        msg.info('Files are verified, progressing.')
+        global createdfile
+        global skinfolder
         global steve
         global slim
+        createdfile = create.Create()
+        createdfile.copyfile()
+        skinfolder = createdfile.path  + 'Content/skin_pack'
         steve = Steve()
         slim = Slim()
+        msg.info('{} skin included.'.format(getskincount()))
+        create.createproject()
 
 def getskincount(): return len(steve.output) + len(slim.output)
+def getskins(): return steve.output + slim.output
 
 class Slim:
     def __init__(self, names=[]):
@@ -48,10 +59,18 @@ class Slim:
         for name in os.listdir(free):
             realname = name.strip('.png')
             names.append(realname)
+            shutil.copy(free + '/' + name, skinfolder)
+            os.rename(skinfolder + '/' + name, skinfolder + '/' + realname + '_customSlim.png')
+            create.text_skin(realname)
+            create.jsonparse_skin(realname, 'geometry.humanoid.customSlim', realname + '_customSlim.png', 'free')
             msg.info('Including (Slim -> Free): {}'.format(name))
         for name in os.listdir(paid):
             realname = name.strip('.png')
             names.append(realname)
+            shutil.copy(paid + '/' + name, skinfolder)
+            os.rename(skinfolder + '/' + name, skinfolder + '/' + realname + '_customSlim.png')
+            create.text_skin(realname)
+            create.jsonparse_skin(realname, 'geometry.humanoid.customSlim', realname + '_customSlim.png', 'paid')
             msg.info('Including (Slim -> Paid): {}'.format(name))
         self.output = names
 
@@ -62,10 +81,18 @@ class Steve:
         for name in os.listdir(free):
             realname = name.strip('.png')
             names.append(realname)
+            shutil.copy(free + '/' + name, skinfolder)
+            os.rename(skinfolder + '/' + name, skinfolder + '/' + realname + '_custom.png')
+            create.text_skin(realname)
+            create.jsonparse_skin(realname, 'geometry.humanoid.custom', realname + '_custom.png', 'free')
             msg.info('Including (Steve -> Free): {}'.format(name))
         for name in os.listdir(paid):
             realname = name.strip('.png')
             names.append(realname)
+            shutil.copy(paid + '/' + name, skinfolder)
+            os.rename(skinfolder + '/' + name, skinfolder + '/' + realname + '_custom.png')
+            create.text_skin(realname)
+            create.jsonparse_skin(realname, 'geometry.humanoid.custom', realname + '_custom.png', 'paid')
             msg.info('Including (Steve -> Paid): {}'.format(name))
         self.output = names
             
