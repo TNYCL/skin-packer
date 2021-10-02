@@ -39,6 +39,8 @@ def checkall():
         steve = Steve()
         slim = Slim()
 
+def getskincount(): return len(steve.output) + len(slim.output)
+
 class Slim:
     def __init__(self, names=[]):
         free = directory.format('/Skins/Slim/Free')
