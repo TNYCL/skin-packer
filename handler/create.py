@@ -18,8 +18,8 @@ class Create:
         try:
             shutil.copytree(src, self.path)
         except FileExistsError:
-            print('This project already created.')
-            exit(file.openfolder(self.path))
+            file.openfolder(self.path)
+            msg.error('This project already created.')
 
 selectedpath = select.filepath
 createdpath = Create().path

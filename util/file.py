@@ -50,28 +50,27 @@ def checkall():
         create.createproject()
 
 def getskincount(): return len(steve.output) + len(slim.output)
-def getskins(): return steve.output + slim.output
 
 class Slim:
     def __init__(self, names=[]):
         free = directory.format('/Skins/Slim/Free')
         paid = directory.format('/Skins/Slim/Paid')
         for name in os.listdir(free):
-            realname = name.strip('.png')
+            realname = name.replace('.png', '')
             names.append(realname)
             shutil.copy(free + '/' + name, skinfolder)
             os.rename(skinfolder + '/' + name, skinfolder + '/' + realname + '_customSlim.png')
             create.text_skin(realname)
             create.jsonparse_skin(realname, 'geometry.humanoid.customSlim', realname + '_customSlim.png', 'free')
-            msg.info('Including (Slim -> Free): {}'.format(name))
+            msg.info('Including (Slim -> Free): {}'.format(realname))
         for name in os.listdir(paid):
-            realname = name.strip('.png')
+            realname = name.replace('.png', '')
             names.append(realname)
             shutil.copy(paid + '/' + name, skinfolder)
             os.rename(skinfolder + '/' + name, skinfolder + '/' + realname + '_customSlim.png')
             create.text_skin(realname)
             create.jsonparse_skin(realname, 'geometry.humanoid.customSlim', realname + '_customSlim.png', 'paid')
-            msg.info('Including (Slim -> Paid): {}'.format(name))
+            msg.info('Including (Slim -> Paid): {}'.format(realname))
         self.output = names
 
 class Steve:
@@ -79,20 +78,20 @@ class Steve:
         free = directory.format('/Skins/Steve/Free')
         paid = directory.format('/Skins/Steve/Paid')
         for name in os.listdir(free):
-            realname = name.strip('.png')
+            realname = name.replace('.png', '')
             names.append(realname)
             shutil.copy(free + '/' + name, skinfolder)
             os.rename(skinfolder + '/' + name, skinfolder + '/' + realname + '_custom.png')
             create.text_skin(realname)
             create.jsonparse_skin(realname, 'geometry.humanoid.custom', realname + '_custom.png', 'free')
-            msg.info('Including (Steve -> Free): {}'.format(name))
+            msg.info('Including (Steve -> Free): {}'.format(realname))
         for name in os.listdir(paid):
-            realname = name.strip('.png')
+            realname = name.replace('.png', '')
             names.append(realname)
             shutil.copy(paid + '/' + name, skinfolder)
             os.rename(skinfolder + '/' + name, skinfolder + '/' + realname + '_custom.png')
             create.text_skin(realname)
             create.jsonparse_skin(realname, 'geometry.humanoid.custom', realname + '_custom.png', 'paid')
-            msg.info('Including (Steve -> Paid): {}'.format(name))
+            msg.info('Including (Steve -> Paid): {}'.format(realname))
         self.output = names
             
