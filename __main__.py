@@ -1,3 +1,3 @@
-from util import file
+from handler import select
 
-file.checkall()
+select.opendialog()

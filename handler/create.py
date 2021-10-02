@@ -2,12 +2,12 @@ import os
 import json
 from util import uuid
 from util import file
-import input
+from handler import select
 import shutil
 
-path = input.file.path
-pname = input.file.pname
-src = "template"
+path = select.filepath
+pname = select.pname
+src = "settings"
 
 class Create:
     def __init__(self, pname):
@@ -17,9 +17,8 @@ class Create:
     def copyfile(self):
         try:
             shutil.copytree(src, self.path)
-            os.rename(self.path + '')
         except FileExistsError:
-            print("This project template already have.")
+            print("This project already created.")
             exit(file.openfolder(self.path))
 
 def manifest():
@@ -30,4 +29,4 @@ def manifest():
             data["header"]["uuid"] = str(uuid.header)
             data["modules"][0]["uuid"] = str(uuid.modules)
     except Exception:
-        exit("ERROR: in manifest() function. (Error #1)")
+        exit("ERROR: (#1)")
