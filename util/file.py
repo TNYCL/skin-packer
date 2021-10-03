@@ -47,6 +47,7 @@ def checkall():
         slim = Slim()
         msg.info('{} skin included.'.format(getskincount()))
         create.createproject()
+        msg.success('{} project has been successfully packaged.'.format(select.pname))
 
 def getskincount(): return len(steve.output) + len(slim.output)
 
