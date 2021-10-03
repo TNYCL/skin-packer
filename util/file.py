@@ -4,7 +4,6 @@ from pathlib import Path
 from handler import select
 from util import message as msg
 import shutil
-import codecs
 
 def openfolder(path):
     path = os.path.realpath(path)
