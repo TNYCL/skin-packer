@@ -1,6 +1,7 @@
 from os import path
 import os
 import ssl
+from util import message as msg
 from io import BytesIO
 from urllib.request import urlopen
 from zipfile import ZipFile
@@ -21,7 +22,7 @@ def download(extract_to='./settings'):
             zipfile.extractall(path=extract_to)
             print('Settings folder successfully created.')
         except Exception:
-            exit('ERROR: in download() function. (Error #2)')
+            msg.error('There was a problem downloading the template.zip')
     if template_exist == False:
         print('Template folder not exists, downloading.')
         try:
@@ -32,6 +33,6 @@ def download(extract_to='./settings'):
             zipfile.extractall(path='./template')
             print('Template folder successfully created.')
         except Exception:
-            exit('ERROR: in download() function. (Error #2)')
+            msg.error('There was a problem downloading the settings.zip')
     return True
 
