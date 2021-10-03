@@ -10,7 +10,7 @@ def opendialog():
     global filepath
     global pname
     check.download()
-    pname = input('Project Name: ')
+    pname = input(msg.color.green+'Project Name'+msg.color.end+': ')
     filepath = fd.askdirectory(title='Select Skin Pack')
     msg.info('Checking folders.')
     from util import file
